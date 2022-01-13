@@ -14,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.myapplication.entity.Course;
+import com.springboot.myapplication.entity.Student;
 import com.springboot.myapplication.repository.CourseRepository;
 import com.springboot.myapplication.service.CourseService;
+import com.springboot.myapplication.service.StudentService;
+import com.springboot.myapplication.serviceimplmentation.StudentServiceImp;
 
 @RestController
 @RequestMapping("/education/course")
@@ -23,6 +26,9 @@ public class CourseController
 {
    @Autowired
 	private CourseService courseService;
+   
+   @Autowired
+   private StudentService studentService;
    
    @PostMapping("/addcourse")
    private Course addCourse(@RequestBody Course course)
@@ -77,5 +83,25 @@ public class CourseController
 	   courseService.deleteCourse(id);
 	   String string1="The course contain id which you entered "+id+" got  deleted from the database";
 	   return string1;
+   }
+   
+   @PostMapping("/{courseid}/{studentid}")
+   private Course AssignStudentToCourse(@PathVariable int courseid,@PathVariable int studentid)
+   {
+	   Course course=courseService.getCourse(courseid);
+	   if(course==null)
+	   {
+		   String string="The id which you entered "+courseid+" is not avaibale in the database to delete";
+		   return null;
+	   }
+	   Student student=studentService.getStudent(studentid);
+	   
+	   if(student==null)
+	   {
+		   String string1="The id which you entered "+studentid+" is not avaibale in the database to delete";
+		   return null;   
+	   }
+	   Course course1=courseService.addStudentToCourse(courseid, studentid);
+	   return course1;
    }
 }

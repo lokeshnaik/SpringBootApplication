@@ -15,5 +15,7 @@ public interface CourseRepository
 	public Course updateCourseDetails(Course course,int id);
 	
 	public void deleteWholeCourse(int id);
+	
+	public Course addStudentInCourse(int courseid,int studentid);
 
 }

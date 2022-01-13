@@ -31,7 +31,7 @@ public class StudentServiceImp implements StudentService
 		student1.setLastName(student.getLastName());
 		student1.setAge(student.getAge());
 		student1.setContactNumber(student.getContactNumber());
- 
+    //    course.setCourseName(student.getcourse());
 		
 		studentRepository.addNewStudent(student1);
 		return student1;

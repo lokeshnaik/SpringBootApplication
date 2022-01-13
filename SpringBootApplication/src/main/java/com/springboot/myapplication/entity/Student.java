@@ -15,6 +15,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name="Student")
@@ -38,11 +40,24 @@ public class Student
 	@Column(name="contactNumber",length=10)
 	private String contactNumber;
 	
+    @JsonIgnore
 	@ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},fetch = FetchType.LAZY)
 	@JoinTable(name="Registration",joinColumns= @JoinColumn(name="studentid"),inverseJoinColumns = @JoinColumn(name="courseid"))
 	private List<Course> course;
 	
-	private void add(Course tempcourse)
+	public List<Course> getCourse() {
+		return course;
+	}
+
+
+
+	public void setCourse(List<Course> course) {
+		this.course = course;
+	}
+
+
+
+	public void add(Course tempcourse)
 	{
 		if(course==null)
 		{

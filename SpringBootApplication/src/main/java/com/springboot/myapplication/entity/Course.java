@@ -18,6 +18,7 @@ import javax.persistence.Table;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -44,11 +45,12 @@ public class Course
 	@Column(name="courseStartDate")
 	private LocalDate courseStartdate;
 	
+	@JsonIgnore
 	@ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},fetch = FetchType.LAZY)
 	@JoinTable(name="Registration",joinColumns= @JoinColumn(name="courseid"),inverseJoinColumns = @JoinColumn(name="studentid"))
 	private List<Student> student;
 	
-	private void add(Student tempstudent)
+	public void add(Student tempstudent)
 	{
 		if(student==null)
 		{
@@ -58,6 +60,14 @@ public class Course
 		student.add(tempstudent);
 	}
 	
+	public List<Student> getStudent() {
+		return student;
+	}
+
+	public void setStudent(List<Student> student) {
+		this.student = student;
+	}
+
 	public int getCourseid() {
 		return courseid;
 	}

@@ -54,6 +54,12 @@ public class CourseServiceImp implements CourseService
 		return ;
 		
 	}
+
+	@Override
+	public Course addStudentToCourse(int courseid, int studentid) {
+		Course course=courseRepository.addStudentInCourse(courseid,studentid);
+		return course;
+	}
 	
 
 }

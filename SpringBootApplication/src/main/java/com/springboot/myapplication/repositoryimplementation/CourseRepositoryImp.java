@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.springboot.myapplication.entity.Course;
+import com.springboot.myapplication.entity.Student;
 import com.springboot.myapplication.repository.CourseRepository;
 
 @Repository
@@ -70,6 +71,19 @@ public class CourseRepositoryImp  implements CourseRepository
 	    session.close();
 	    
 	    return ;
+		
+	}
+
+		@Override
+	public Course addStudentInCourse(int courseid, int studentid) {
+	  Session session=factory.openSession();
+	  session.beginTransaction();
+	  Student student=session.get(Student.class, studentid);
+	  Course course=session.get(Course.class, courseid);
+	  course.add(student);
+	  session.save(course);
+	  session.getTransaction().commit();
+		return course;
 		
 	}
 
