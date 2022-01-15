@@ -18,11 +18,13 @@ import javax.persistence.Table;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 
 @Entity
 @Table(name="course")
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class,property="courseid")
 public class Course 
 {
     
@@ -45,7 +47,8 @@ public class Course
 	@Column(name="courseStartDate")
 	private LocalDate courseStartdate;
 	
-	@JsonIgnore
+	//@JsonIgnore
+	//@JsonBackReference
 	@ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},fetch = FetchType.LAZY)
 	@JoinTable(name="Registration",joinColumns= @JoinColumn(name="courseid"),inverseJoinColumns = @JoinColumn(name="studentid"))
 	private List<Student> student;

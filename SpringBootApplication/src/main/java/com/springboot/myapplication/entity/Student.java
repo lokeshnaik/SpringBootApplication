@@ -15,11 +15,15 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+
 
 
 @Entity
 @Table(name="Student")
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class,property="studentid")
 public class Student 
 {
 	@Id
@@ -40,7 +44,8 @@ public class Student
 	@Column(name="contactNumber",length=10)
 	private String contactNumber;
 	
-    @JsonIgnore
+   // @JsonIgnore
+	//@JsonManagedReference
 	@ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},fetch = FetchType.LAZY)
 	@JoinTable(name="Registration",joinColumns= @JoinColumn(name="studentid"),inverseJoinColumns = @JoinColumn(name="courseid"))
 	private List<Course> course;
