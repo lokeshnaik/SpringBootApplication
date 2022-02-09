@@ -20,12 +20,9 @@ public class CourseServiceImp implements CourseService
 
 	@Override
 	public Course addCourse(Course course) {
-		course.setCourseName(course.getCourseName());
-		course.setCourseDuration(course.getCourseDuration());
-		course.setCourseFee(course.getCourseFee());
-		course.setCourseStartdate(course.getCourseStartdate());
-		courseRepository.addNewCourse(course);
-		return course;
+		Course course1;
+		course1=courseRepository.addNewCourse(course);
+		return course1;
 	}
 
 	@Override
@@ -43,16 +40,16 @@ public class CourseServiceImp implements CourseService
 	@Override
 	@Transactional
 	public Course updateCourse(Course course, int id) {
-		 Course course1=courseRepository.updateCourseDetails(course,id);
+		Course course1=courseRepository.updateCourseDetails(course,id);
 		return course1;
 	}
 
 	@Override
 	public void deleteCourse(int id) {
 		courseRepository.deleteWholeCourse(id);
-		
+
 		return ;
-		
+
 	}
 
 	@Override
@@ -60,6 +57,6 @@ public class CourseServiceImp implements CourseService
 		Course course=courseRepository.addStudentInCourse(courseid,studentid);
 		return course;
 	}
-	
+
 
 }

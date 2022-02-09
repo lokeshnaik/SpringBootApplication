@@ -27,42 +27,42 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class,property="courseid")
 public class Course 
 {
-    
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="courseid")
 	private int courseid;
-	
+
 	@Column(name="courseName")
 	private String courseName;
-	
+
 	@Column(name="courseFee")
 	private long courseFee;
-	
-	
+
+
 	@Column(name="courseDuration")
 	private long courseDuration;
-	
+
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	@Column(name="courseStartDate")
 	private LocalDate courseStartdate;
-	
+
 	//@JsonIgnore
 	//@JsonBackReference
 	@ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},fetch = FetchType.LAZY)
 	@JoinTable(name="Registration",joinColumns= @JoinColumn(name="courseid"),inverseJoinColumns = @JoinColumn(name="studentid"))
 	private List<Student> student;
-	
+
 	public void add(Student tempstudent)
 	{
 		if(student==null)
 		{
 			student=new ArrayList<>();
 		}
-		
+
 		student.add(tempstudent);
 	}
-	
+
 	public List<Student> getStudent() {
 		return student;
 	}
@@ -70,6 +70,7 @@ public class Course
 	public void setStudent(List<Student> student) {
 		this.student = student;
 	}
+
 
 	public int getCourseid() {
 		return courseid;

@@ -23,17 +23,9 @@ public class StudentServiceImp implements StudentService
 	
 	@Override
 	public Student addStudent(Student student) {
-		
-		Student student1=new Student();
-	//	Course course=new Course();
-		student1.setStudentid(student.getStudentid());
-		student1.setFirstName(student.getFirstName());	
-		student1.setLastName(student.getLastName());
-		student1.setAge(student.getAge());
-		student1.setContactNumber(student.getContactNumber());
-    //    course.setCourseName(student.getcourse());
-		
-		studentRepository.addNewStudent(student1);
+
+		Student student1;
+		student1=studentRepository.addNewStudent(student);
 		return student1;
 	}
 

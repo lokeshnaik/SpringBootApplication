@@ -30,26 +30,24 @@ public class Student
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="studentid")
 	private int studentid;
-	
+
 	@Column(name="firstName")
 	private String firstName;
-	
+
 	@Column(name="lastName")
 	private String lastName;
-	
+
 	@Column(name="age")
 	private int age;
-	
-	
+
+
 	@Column(name="contactNumber",length=10)
 	private String contactNumber;
-	
-   // @JsonIgnore
-	//@JsonManagedReference
+
 	@ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},fetch = FetchType.LAZY)
 	@JoinTable(name="Registration",joinColumns= @JoinColumn(name="studentid"),inverseJoinColumns = @JoinColumn(name="courseid"))
 	private List<Course> course;
-	
+
 	public List<Course> getCourse() {
 		return course;
 	}
@@ -70,8 +68,8 @@ public class Student
 		}
 		course.add(tempcourse);
 	}
-	
-	
+
+
 
 	public int getStudentid() {
 		return studentid;
@@ -131,7 +129,7 @@ public class Student
 		this.contactNumber = contactNumber;
 	}
 
-	
+
 
 
 	public Student() {
@@ -149,7 +147,7 @@ public class Student
 		this.contactNumber = contactNumber;
 	}
 
-	
+
 
 
 	@Override
@@ -157,8 +155,8 @@ public class Student
 		return "Student [studentid=" + studentid + ", firstName=" + firstName + ", lastName=" + lastName + ", age="
 				+ age + ", contactNumber=" + contactNumber + "]";
 	}
-	
-	
-	
+
+
+
 
 }
