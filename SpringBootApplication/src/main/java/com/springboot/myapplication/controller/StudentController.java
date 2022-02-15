@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.springboot.myapplication.dto.StudentDto;
 import com.springboot.myapplication.entity.Student;
 import com.springboot.myapplication.response.StudentResponse;
 import com.springboot.myapplication.service.StudentService;
@@ -26,9 +27,9 @@ public class StudentController
 	private StudentService studentService;
 
 	@PostMapping("/addstudent")
-	private ResponseEntity<StudentResponse> addStudent(@RequestBody Student student)
+	private ResponseEntity<StudentResponse> addStudent(@RequestBody StudentDto student)
 	{
-		Student student1=studentService.addStudent(student);
+		StudentDto student1=studentService.addStudent(student);
 		return ResponseEntity.status(HttpStatus.CREATED).body(new StudentResponse("Student is added",201,student1));
 	}
 

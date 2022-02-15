@@ -3,7 +3,7 @@ package com.springboot.myapplication.dto;
 public class StudentDto 
 {
 
-	private int studentid;
+//	private int studentid;
 
 	private String firstName;
 
@@ -23,7 +23,7 @@ public class StudentDto
 
 	public StudentDto(int studentid, String firstName, String lastName, int age, String contactNumber) {
 		super();
-		this.studentid = studentid;
+	//	this.studentid = studentid;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.age = age;
@@ -32,13 +32,13 @@ public class StudentDto
 
 
 
-	public int getStudentid() {
+/*	public int getStudentid() {
 		return studentid;
 	}
 
 	public void setStudentid(int studentid) {
 		this.studentid = studentid;
-	}
+	}*/
 
 	public String getFirstName() {
 		return firstName;
@@ -74,9 +74,15 @@ public class StudentDto
 
 
 
+//	@Override
+//	public String toString() {
+//		return "StudentDto [studentid=" + studentid + ", firstName=" + firstName + ", lastName=" + lastName + ", age="
+//				+ age + ", contactNumber=" + contactNumber + "]";
+//	}
+	
 	@Override
 	public String toString() {
-		return "StudentDto [studentid=" + studentid + ", firstName=" + firstName + ", lastName=" + lastName + ", age="
+		return "StudentDto [ firstName=" + firstName + ", lastName=" + lastName + ", age="
 				+ age + ", contactNumber=" + contactNumber + "]";
 	}
 

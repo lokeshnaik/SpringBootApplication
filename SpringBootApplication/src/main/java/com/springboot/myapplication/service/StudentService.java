@@ -2,11 +2,12 @@ package com.springboot.myapplication.service;
 
 import java.util.List;
 
+import com.springboot.myapplication.dto.StudentDto;
 import com.springboot.myapplication.entity.Student;
 
 public interface StudentService 
 {
-  public Student addStudent(Student student);
+  public StudentDto addStudent(StudentDto student);
   
   public Student getStudent(int id);
   

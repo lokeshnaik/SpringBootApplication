@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.springboot.myapplication.dto.StudentDto;
 import com.springboot.myapplication.entity.Course;
 import com.springboot.myapplication.entity.Student;
 import com.springboot.myapplication.repository.StudentRepository;
@@ -22,11 +23,16 @@ public class StudentServiceImp implements StudentService
 	private StudentRepository studentRepository;
 	
 	@Override
-	public Student addStudent(Student student) {
+	public StudentDto addStudent(StudentDto student) {
 
-		Student student1;
-		student1=studentRepository.addNewStudent(student);
-		return student1;
+		Student student1=new Student();
+		student1.setFirstName(student.getFirstName());
+		student1.setAge(student.getAge());
+		student1.setContactNumber(student.getContactNumber());
+		student1.setLastName(student.getLastName());
+	//	student1.setStudentid(student.getStudentid());
+		studentRepository.addNewStudent(student1);
+		return student;
 	}
 
 	@Override

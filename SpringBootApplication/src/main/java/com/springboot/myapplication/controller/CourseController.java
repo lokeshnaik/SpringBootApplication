@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.springboot.myapplication.dto.CourseDto;
+import com.springboot.myapplication.dto.CourseDtoWithId;
 import com.springboot.myapplication.entity.Course;
 import com.springboot.myapplication.entity.Student;
 import com.springboot.myapplication.repository.CourseRepository;
@@ -34,7 +36,7 @@ public class CourseController
 	private StudentService studentService;
 
 	@PostMapping("/addcourse")
-	private ResponseEntity<CourseResponse> addCourse(@RequestBody Course course)
+	private ResponseEntity<CourseResponse> addCourse(@RequestBody CourseDto course)
 	{
 		course=courseService.addCourse(course);
 		return ResponseEntity.status(HttpStatus.CREATED).body(new CourseResponse("Course is added",201,course));
@@ -43,7 +45,7 @@ public class CourseController
 	@GetMapping("/getcourse/{id}")
 	private ResponseEntity<CourseResponse> getCourse(@PathVariable int id)
 	{
-		Course course=courseService.getCourse(id);
+		CourseDtoWithId course=courseService.getCourse(id);
 
 		if(course==null)
 		{
@@ -58,7 +60,7 @@ public class CourseController
 	@GetMapping("/getallcourses")
 	private ResponseEntity<CourseResponse> getAllCourses()
 	{
-		List<Course> course=courseService.getAllCourses(); 
+		List<CourseDtoWithId> course=courseService.getAllCourses(); 
 		return ResponseEntity.status(HttpStatus.OK).body(new CourseResponse("Got all the available course in the list",200,course));
 	}
 
@@ -77,7 +79,7 @@ public class CourseController
 	@DeleteMapping("/deletecourse/{id}")
 	private ResponseEntity<CourseResponse> deleteCourse(@PathVariable int id)
 	{
-		Course course=courseService.getCourse(id);
+		CourseDtoWithId course=courseService.getCourse(id);
 		if(course==null)
 		{
 			String string="The id which you entered "+id+" is not avaibale in the database to delete";
@@ -91,7 +93,7 @@ public class CourseController
 	@PostMapping("/{courseid}/{studentid}")
 	private ResponseEntity<CourseResponse> AssignStudentToCourse(@PathVariable int courseid,@PathVariable int studentid)
 	{
-		Course course=courseService.getCourse(courseid);
+		CourseDtoWithId course=courseService.getCourse(courseid);
 		if(course==null)
 		{
 			String string="The id which you entered "+courseid+" is not avaibale in the database to delete";

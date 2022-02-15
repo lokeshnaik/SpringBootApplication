@@ -3,9 +3,9 @@ package com.springboot.myapplication.dto;
 import java.time.LocalDate;
 
 
-public class CourseDto 
+public class CourseDtoWithId 
 {
-//	private int courseid;
+	private int courseid;
 
 	private String courseName;
 
@@ -17,15 +17,15 @@ public class CourseDto
 
 
 
-	public CourseDto() {
+	public CourseDtoWithId() {
 		super();
 	}
 
 
 
-	public CourseDto(int courseid, String courseName, long courseFee, long courseDuration, LocalDate courseStartdate) {
+	public CourseDtoWithId(int courseid, String courseName, long courseFee, long courseDuration, LocalDate courseStartdate) {
 		super();
-	//	this.courseid = courseid;
+		this.courseid = courseid;
 		this.courseName = courseName;
 		this.courseFee = courseFee;
 		this.courseDuration = courseDuration;
@@ -34,13 +34,13 @@ public class CourseDto
 
 
 
-/*	public int getCourseid() {
+	public int getCourseid() {
 		return courseid;
 	}
 
 	public void setCourseid(int courseid) {
 		this.courseid = courseid;
-	}*/
+	}
 
 	public String getCourseName() {
 		return courseName;
@@ -76,20 +76,13 @@ public class CourseDto
 
 
 
-//	@Override
-//	public String toString() {
-//		return "CourseDto [courseid=" + courseid + ", courseName=" + courseName + ", courseFee=" + courseFee
-//				+ ", courseDuration=" + courseDuration + ", courseStartdate=" + courseStartdate + "]";
-//	}
-	
 	@Override
 	public String toString() {
-		return "CourseDto [ courseName=" + courseName + ", courseFee=" + courseFee
+		return "CourseDto [courseid=" + courseid + ", courseName=" + courseName + ", courseFee=" + courseFee
 				+ ", courseDuration=" + courseDuration + ", courseStartdate=" + courseStartdate + "]";
 	}
 
 
 
-
-
 }
+

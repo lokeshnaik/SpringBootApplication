@@ -1,5 +1,6 @@
 package com.springboot.myapplication.serviceimplmentation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -7,6 +8,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.springboot.myapplication.dto.CourseDto;
+import com.springboot.myapplication.dto.CourseDtoWithId;
 import com.springboot.myapplication.entity.Course;
 import com.springboot.myapplication.repository.CourseRepository;
 import com.springboot.myapplication.service.CourseService;
@@ -19,22 +22,45 @@ public class CourseServiceImp implements CourseService
 	private CourseRepository courseRepository;
 
 	@Override
-	public Course addCourse(Course course) {
-		Course course1;
-		course1=courseRepository.addNewCourse(course);
-		return course1;
+	public CourseDto addCourse(CourseDto course) {
+		Course course1=new Course();
+		course1.setCourseName(course.getCourseName());
+	//	course1.setCourseid(course.getCourseid());
+		course1.setCourseDuration(course.getCourseDuration());
+		course1.setCourseFee(course.getCourseFee());
+		course1.setCourseStartdate(course.getCourseStartdate());
+		courseRepository.addNewCourse(course1);
+		return course;
 	}
 
 	@Override
-	public Course getCourse(int id) {
+	public CourseDtoWithId getCourse(int id) {
 		Course course=courseRepository.getStudentDetailById(id);
-		return course;
+		CourseDtoWithId course1=new CourseDtoWithId();
+		course1.setCourseDuration(course.getCourseDuration());
+        course1.setCourseFee(course.getCourseFee());
+        course1.setCourseid(course.getCourseid());
+        course1.setCourseName(course.getCourseName());
+        course1.setCourseStartdate(course.getCourseStartdate());
+        return course1;
 	}
 
 	@Override
-	public List<Course> getAllCourses() {
+	public List<CourseDtoWithId> getAllCourses() {
 		List<Course> course=courseRepository.getAllCoursesAvailable();
-		return course;
+		List<CourseDtoWithId> coursedtoid=new ArrayList<CourseDtoWithId>();
+		for(Course course1:course)
+		{
+			CourseDtoWithId coursedt=new CourseDtoWithId();	
+			coursedt.setCourseid(course1.getCourseid());
+			coursedt.setCourseDuration(course1.getCourseDuration());
+			coursedt.setCourseFee(course1.getCourseFee());
+			coursedt.setCourseName(course1.getCourseName());
+			coursedt.setCourseStartdate(course1.getCourseStartdate());
+			coursedtoid.add(coursedt);
+			
+		}
+		return coursedtoid;
 	}
 
 	@Override
