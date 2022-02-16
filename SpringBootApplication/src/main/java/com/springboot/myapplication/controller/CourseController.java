@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.myapplication.dto.CourseDto;
 import com.springboot.myapplication.dto.CourseDtoWithId;
+import com.springboot.myapplication.dto.StudentDtoWithId;
 import com.springboot.myapplication.entity.Course;
 import com.springboot.myapplication.entity.Student;
 import com.springboot.myapplication.repository.CourseRepository;
@@ -99,7 +100,7 @@ public class CourseController
 			String string="The id which you entered "+courseid+" is not avaibale in the database to delete";
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new CourseResponse(string,404,null));
 		}
-		Student student=studentService.getStudent(studentid);
+		StudentDtoWithId student=studentService.getStudent(studentid);
 
 		if(student==null)
 		{

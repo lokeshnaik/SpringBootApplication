@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.myapplication.dto.StudentDto;
+import com.springboot.myapplication.dto.StudentDtoWithId;
 import com.springboot.myapplication.entity.Student;
 import com.springboot.myapplication.response.StudentResponse;
 import com.springboot.myapplication.service.StudentService;
@@ -36,37 +37,38 @@ public class StudentController
 	@GetMapping("/getstudent/{id}")
 	private ResponseEntity<StudentResponse> getStudent(@PathVariable int id)
 	{
-		Student student=studentService.getStudent(id);
+		StudentDtoWithId student=studentService.getStudent(id);
 		return ResponseEntity.status(HttpStatus.OK).body(new StudentResponse("Got the student of given desired id",200,student));
 	}
 
 	@GetMapping("/getallstudents")
 	private ResponseEntity<StudentResponse> getAllStudents()
 	{
-		List<Student> students=studentService.getAllStudents();
+		List<StudentDtoWithId> students=studentService.getAllStudents();
 		return ResponseEntity.status(HttpStatus.OK).body(new StudentResponse("Got the student those are available in the list",200,students));
 	}
 
 
 	@PutMapping("/updatestudent/{id}")
-	private ResponseEntity<StudentResponse> updateStudent(@RequestBody Student student,@PathVariable int id) throws Exception
+	private ResponseEntity<StudentResponse> updateStudent(@RequestBody StudentDto student,@PathVariable int id) throws Exception
 	{
-		Student student1=studentService.getStudent(id);
+		StudentDtoWithId student1=studentService.getStudent(id);
 
 		if(student1==null)
 		{
 			System.out.println("Student with the given id "+id+" is not avaibale");
 			throw new Exception("Student with give id "+id+" is not avaibale to update" );
 		}
+	///	StudentDtoWithId stud=new StudentDtoWithId();
 
-		student=studentService.updateStudent(student, id);
-		return ResponseEntity.status(HttpStatus.OK).body(new StudentResponse("Student with give id="+id+" is updated",200,student1));
+		StudentDtoWithId stud=studentService.updateStudent(student, id);
+		return ResponseEntity.status(HttpStatus.OK).body(new StudentResponse("Student with give id="+id+" is updated",200,stud));
 	}
 
 	@DeleteMapping("/deletestudent/{id}")
 	private ResponseEntity<StudentResponse> deleteStudent(@PathVariable int id) throws Exception
 	{
-		Student student=studentService.getStudent(id);
+		StudentDtoWithId student=studentService.getStudent(id);
 		if(student==null)
 		{
 			throw new Exception("Student with given id "+id+" is not available to delete");
