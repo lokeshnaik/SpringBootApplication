@@ -14,7 +14,7 @@ public interface CourseService {
 
 	public List<CourseDtoWithId> getAllCourses();
 
-	public Course updateCourse(Course course,int id);
+	public CourseDtoWithId updateCourse(CourseDto course,int id);
 
 	public void deleteCourse(int id);
 

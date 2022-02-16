@@ -5,8 +5,6 @@ import java.time.LocalDate;
 
 public class CourseDto 
 {
-//	private int courseid;
-
 	private String courseName;
 
 	private long courseFee;
@@ -23,24 +21,13 @@ public class CourseDto
 
 
 
-	public CourseDto(int courseid, String courseName, long courseFee, long courseDuration, LocalDate courseStartdate) {
+	public CourseDto(String courseName, long courseFee, long courseDuration, LocalDate courseStartdate) {
 		super();
-	//	this.courseid = courseid;
 		this.courseName = courseName;
 		this.courseFee = courseFee;
 		this.courseDuration = courseDuration;
 		this.courseStartdate = courseStartdate;
 	}
-
-
-
-/*	public int getCourseid() {
-		return courseid;
-	}
-
-	public void setCourseid(int courseid) {
-		this.courseid = courseid;
-	}*/
 
 	public String getCourseName() {
 		return courseName;
@@ -74,13 +61,6 @@ public class CourseDto
 		this.courseStartdate = courseStartdate;
 	}
 
-
-
-//	@Override
-//	public String toString() {
-//		return "CourseDto [courseid=" + courseid + ", courseName=" + courseName + ", courseFee=" + courseFee
-//				+ ", courseDuration=" + courseDuration + ", courseStartdate=" + courseStartdate + "]";
-//	}
 	
 	@Override
 	public String toString() {

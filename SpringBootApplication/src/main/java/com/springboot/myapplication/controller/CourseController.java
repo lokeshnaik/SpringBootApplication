@@ -65,14 +65,14 @@ public class CourseController
 	}
 
 	@PutMapping("/updatecourse/{id}")
-	private ResponseEntity<CourseResponse> updateCourse(@RequestBody Course course,@PathVariable int id) throws Exception
+	private ResponseEntity<CourseResponse> updateCourse(@RequestBody CourseDto course,@PathVariable int id) throws Exception
 	{
 		if(course==null)
 		{
 			throw new Exception("Course of given id "+id+" is not available to update");
 		}
 
-		Course course1=courseService.updateCourse(course,id);
+		CourseDtoWithId course1=courseService.updateCourse(course,id);
 		return ResponseEntity.status(HttpStatus.OK).body(new CourseResponse("Course of given id="+id+" is updated",200,course1));  
 	}
 

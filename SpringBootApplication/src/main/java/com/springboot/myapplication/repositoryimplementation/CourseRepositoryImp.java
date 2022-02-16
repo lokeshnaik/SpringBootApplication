@@ -47,18 +47,9 @@ public class CourseRepositoryImp  implements CourseRepository
 	public Course updateCourseDetails(Course course, int id) {
 		Session session=factory.openSession();
 		session.beginTransaction();
-		Course course1=(Course)session.get(Course.class,id);
-		if(course1!=null)
-		{
-		course1.setCourseName(course.getCourseName());
-		course1.setCourseFee(course.getCourseFee());
-		course1.setCourseDuration(course.getCourseDuration());
-		course1.setCourseStartdate(course.getCourseStartdate());
-		}
-		session.update(course1);
-		
+		session.saveOrUpdate(course);		
 		session.getTransaction().commit();
-		return course1;
+		return course;
 	}
 
 	@Override

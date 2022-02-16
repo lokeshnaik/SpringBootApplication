@@ -65,9 +65,21 @@ public class CourseServiceImp implements CourseService
 
 	@Override
 	@Transactional
-	public Course updateCourse(Course course, int id) {
-		Course course1=courseRepository.updateCourseDetails(course,id);
-		return course1;
+	public CourseDtoWithId updateCourse(CourseDto course, int id) {
+		Course cour=new Course();
+		cour.setCourseid(id);
+		cour.setCourseDuration(course.getCourseDuration());
+		cour.setCourseFee(course.getCourseFee());
+		cour.setCourseName(course.getCourseName());
+		cour.setCourseStartdate(course.getCourseStartdate());
+		Course course1=courseRepository.updateCourseDetails(cour,id);
+		CourseDtoWithId courseid=new CourseDtoWithId();
+		courseid.setCourseid(course1.getCourseid());
+		courseid.setCourseDuration(course1.getCourseDuration());
+		courseid.setCourseFee(course1.getCourseFee());
+		courseid.setCourseName(course1.getCourseName());
+		courseid.setCourseStartdate(course1.getCourseStartdate());
+		return courseid;
 	}
 
 	@Override
